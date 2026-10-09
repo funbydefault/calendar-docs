@@ -138,7 +138,7 @@ Perform calendar mutations, automatic stepping, scheduled event evaluation, and 
 Scheduled handlers and On Event Triggered execute on the authority. Client UI, timer lifecycle settings, and event-handler state do not become shared simply because Current Date is replicated. Replicate your own resulting gameplay state where needed. Keep local input and UI on their owning client.
 
 > [!NOTE]
-> Listen-server, dedicated-server, late-join, reconnect, ownership-change, latency/loss, and separate packaged-process acceptance are pending for this candidate. These implementation notes do not establish a verified multiplayer support claim.
+> Calendar 1.0 targets standalone games and listen servers. Dedicated-server deployments are outside its advertised support scope. Separate UE 5.4 packaged-process checks cover two remote clients, late join, reconnect, ownership changes, rejected client mutations, and simulated latency/loss. Final release approval and verification across the supported engine versions remain pending.
 
 ## Validation and troubleshooting
 
