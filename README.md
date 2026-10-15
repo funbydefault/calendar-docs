@@ -119,23 +119,14 @@ Changes use Unreal's undo history. **Save changes** saves the current profile, r
 Create separate definition assets for calendars with different rules. Treat the assigned definition as fixed during a play session. After changing rules, validate them and initialize the component again.
 
 | Setting | Meaning |
-
 |---|---|
-
 | Definition ID | Stable identity used by snapshots and diagnostics. Keep it unique and preserve it when updating an existing calendar. |
-
 | Months | Ordered months. Each needs a unique ID and at least one day. The first entry is month `1`. |
-
 | Weekdays | Ordered weekday cycle. Each needs a unique ID. Its entry count defines the length of a week. |
-
 | Epoch Weekday Index | Zero-based weekday assigned to year `1`, month `1`, day `1`. It must reference a weekday entry. |
-
 | Clock | Hours per day, minutes per hour, and seconds per minute. Each value must be at least `1`. |
-
 | Start Date | Date used when initializing or resetting the component. It must fit the calendar rules. |
-
 | Year Adjustment Rules | Add or remove days from a selected month in repeating years. |
-
 | Event Categories | Ordered groups of scheduled event entries. |
 
 Years, months, and days start at `1`. Hours, minutes, and seconds start at `0`. Dates before year `1` and values outside the definition's ranges are rejected.
@@ -149,17 +140,11 @@ Give each year-adjustment rule a unique **ID**, such as `LeapDay`. A rule uses *
 Use a reference to your actor's Calendar Component to call these nodes:
 
 | Node | Use |
-
 |---|---|
-
 | Initialize Calendar | Validate the definition and copy its Start Date into the component. An optional replacement definition may be supplied. |
-
 | Try Set Date | Set an exact valid destination date. Invalid values are rejected. |
-
 | Try Advance | Move forward or backward by a signed number of seconds, minutes, hours, days, weeks, months, or years. |
-
 | Try Step | Apply the configured automatic unit and amount once, without starting a timer. |
-
 | Reset to Start Date | Return to the definition's Start Date. Event evaluation is off by default for this reset. |
 
 Each returns a **Calendar Operation Result**. Break the result and check **Success** before using the new state. On failure, read **Message**, **Context**, and **Suggested Action**.
@@ -179,17 +164,11 @@ The component exposes **On Calendar Changed**, **On Day Changed**, **On Month Ch
 Automatic advancement uses a world timer. The Calendar Component does not need Tick.
 
 | Setting | Default | Meaning |
-
 |---|---:|---|
-
 | Start Auto Advance on Begin Play | Off | Start the timer after successful automatic initialization. |
-
 | Auto Advance Unit | Second | Calendar unit moved by each timer callback. |
-
 | Auto Advance Amount | `1` | Signed non-zero number of units moved per callback. |
-
 | Auto Advance Interval Seconds | `1` | Game-time interval between callbacks. It must be finite and at least `0.001` seconds. |
-
 | Auto Advance Adjustment Policy | Clamp Day | Missing-day behavior for month and year moves. |
 
 Use **Start Auto Advance** to start or resume, **Pause Auto Advance** to pause a running timer, and **Stop Auto Advance** to clear it. **Configure Auto Advance** changes the settings while the timer is stopped. Stop it before reconfiguring, then start it again.
@@ -221,7 +200,6 @@ Bind the component's **On Event Triggered** delegate and inspect its context. It
 For reusable custom behavior, create a Blueprint derived from **Calendar Event**, implement **Trigger Calendar Event**, and assign that Blueprint class as the entry's **Handler Class**. The handler is cached for that category/event pair. Its object state is not included in calendar save snapshots.
 
 > [!IMPORTANT]
-
 > Point events use exact destination matching by default. Enable **Trigger When Crossed** to notify the latest occurrence crossed by a forward time change. Created events enable this automatically. A range uses **Has End Date** and an **End Date** later than its start; it sends Started and Ended notifications, with the end excluded from its active interval. Moving backwards does not replay range boundaries. Monthly repeats retain their anchor day rather than clamping to a shorter month.
 
 Large jumps produce bounded notifications for the latest occurrence and the prior active interval's end. They do not replay every skipped recurrence. Calendar tries at most 64 earlier repeat anchors when a date is missing. Repeating ranges preserve their duration in configured calendar seconds. Store once-only gameplay completion state in your game; evaluating a matching point again can trigger it again.
@@ -257,7 +235,6 @@ A snapshot includes its schema, Definition ID, date, automatic-advance settings/
 **Restore Auto Advance** controls whether a saved running or paused timer is restored. Turning it off still restores timer settings but leaves the timer stopped. Restoration does not replay scheduled events. A snapshot saves timer settings and state, not the remaining countdown. Restoring a timer starts a fresh configured interval.
 
 > [!WARNING]
-
 > Keep Definition IDs stable. Changing month order, lengths, or other rules can make existing saved dates invalid or change their meaning. Plan and test your own save migration before changing a calendar used by released saves.
 
 ## Reusable calendar UI
@@ -314,7 +291,6 @@ Change the shared calendar, run automatic steps and scheduled events, add/edit/r
 Scheduled handlers and On Event Triggered execute on the authority. Client UI, timer lifecycle settings, and event-handler state do not become shared simply because Current Date is replicated. Replicate your own resulting gameplay state where needed. Keep local input and UI on their owning client.
 
 > [!NOTE]
-
 > Calendar 1.0 targets standalone games and listen servers, where a player also hosts the server. Dedicated-server deployments are outside its advertised support scope. Release verification is in progress; engine and platform compatibility and final release approval remain pending.
 
 ## Validation and troubleshooting
@@ -322,19 +298,12 @@ Scheduled handlers and On Event Triggered execute on the authority. Client UI, t
 Use **Validate Calendar Definition** to obtain all definition issues, or **Validate Configuration** on the component to inspect its assigned rules and settings. Each issue includes a message, context, and suggested action.
 
 | Symptom | Check |
-
 |---|---|
-
 | Calendar is not initialized | Assign a valid definition, enable Initialize on Begin Play, or call Initialize Calendar. |
-
 | Date change is rejected | Check the operation result, valid date ranges, missing-day policy, and authority. |
-
 | Timer does not advance | Initialize first, use a non-zero amount and valid interval, then start it. Check world pause and the last failure. |
-
 | An event is missing | Check Enabled, its exact anchor, repeat interval, end-exclusive range, crossing setting, notification limit, and authority. |
-
 | Snapshot cannot restore | Check schema, Definition ID, date validity, timer settings, and initialization. |
-
 | Replicated calendar cannot initialize | Enable replication on its owner as well as the component, and initialize on the server. |
 
 **Get Diagnostic Snapshot** returns current date, definition identity, initialization, timer, replication/authority, event-count, and last-operation state. Bind **On Operation Failed** for concise error feedback in your own tools. **Enable Debug Logging** is off by default. **Dump Diagnostics to Log** writes one bounded diagnostic entry and is a development-only node.
@@ -350,21 +319,13 @@ For support, include the operation result and a small reproducible case. Remove 
 These utility nodes calculate or inspect values without changing a component's date:
 
 | Node | Result |
-
 |---|---|
-
 | Is Calendar Date Valid | Test an exact date against the definition. |
-
 | Try Advance Calendar Date | Calculate a destination using the chosen unit, amount, and missing-day policy. |
-
 | Try Get Calendar Day Index | Convert a valid date to a zero-based whole-day index from `1/1/1`. |
-
 | Try Get Elapsed Calendar Days | Signed difference between two day indices; time-of-day fields do not affect the difference. |
-
 | Try Get Calendar Weekday | Resolve a weekday index and entry. |
-
 | Does Calendar Event Occur | Match an event at an exact candidate date, without running its handler. |
-
 | Format Calendar Date | Create display text using the definition's month names. Formatting does not validate the date. |
 
 On the definition itself, **Get Days in Month**, **Validate Definition**, and **Is Date Valid** provide rule lookup and validation. Use the native Blueprint types **Calendar Date Time**, **Calendar Operation Result**, **Calendar Validation Report**, **Calendar Event Context**, **Calendar Save Snapshot**, and **Calendar Diagnostic Snapshot** to connect your logic.
