@@ -2,10 +2,10 @@
 
 ## Quick Start
 
-1. **Install Calendar** for Unreal Engine 5.4 using the Epic Games Launcher, or place the matching plugin folder in your project's `Plugins` folder before opening it.
+> [!NOTE]
+> This guide follows the current 1.0 development candidate. Final packages, engine compatibility, and multiplayer acceptance are still being verified. No C++ is needed for this setup.
 
-   > [!NOTE]
-   > This guide follows the current 1.0 development candidate. Final packages, engine compatibility, and multiplayer acceptance are still being verified. No C++ is needed for this setup.
+1. **Install Calendar** for Unreal Engine 5.4 using the Epic Games Launcher, or place the matching plugin folder in your project's `Plugins` folder before opening it.
 
 2. **Enable Calendar** in **Edit > Plugins**, then restart Unreal if prompted.
 
@@ -17,7 +17,7 @@
 
 4. **Click + New profile** and save it in your project's Content folder as `DA_MyCalendar`.
 
-   ![Calendar Editor with New profile marked and the native calendar preview visible](images/quick-profile.png)
+   ![Calendar Editor with New profile marked](images/quick-profile.png)
 
    *New profile creates your own profile, rules, and theme assets. The preview shows the starting date.*
 
@@ -71,8 +71,8 @@
 
     *Success: the displayed date changes while Play runs. This capture uses 1 January, year 1 as its Start Date; yours uses the Start Date in Calendar rules. The editor's silent preview does not advance time.*
 
-    > [!TIP]
-    > Select any screenshot to inspect its controls at full size. For interactive browsing, set input mode and focus in your Player Controller as described in [Add player controls](#add-player-controls).
+> [!TIP]
+> Select any screenshot to inspect its controls at full size. For interactive browsing, set input mode and focus in your Player Controller as described in [Add player controls](#add-player-controls).
 
 ## Contents
 
