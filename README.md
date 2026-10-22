@@ -192,7 +192,7 @@ You can also call **Try Step** once after changing the settings. This moves the 
 
 ![Example Blueprint that stops the timer, sets a seven-day step every 1.5 game-time seconds, advances once, and starts the timer](images/calendar-seven-day-step-blueprint.png)
 
-*Example custom Blueprint function: Stop Auto Advance Ã¢â€ â€™ Configure Auto Advance (Day, 7, 1.5 seconds) Ã¢â€ â€™ Try Step Ã¢â€ â€™ Start Auto Advance. Check each operation's Success result before continuing in your game.*
+*Example custom Blueprint function: Stop Auto Advance > Configure Auto Advance (Day, 7, 1.5 seconds) > Try Step > Start Auto Advance. Check each operation's Success result before continuing in your game.*
 
 The pictured **ApplyWeeklyAdvance** function is a custom example to create in your own Blueprint. The extra **Try Step** moves the date immediately; leaving it out starts with the timer's first callback. Break each returned Calendar Operation Result and continue only on **Success**.
 
@@ -225,7 +225,7 @@ Large jumps produce bounded notifications for the latest occurrence and the prio
 
 Definition assets own **Built-In** events. Runtime **Created** events belong to the Calendar Component and have stable GUIDs. The runtime editor can inspect built-in entries but cannot change or remove them.
 
-Use **Add Created Event** with an event definition and keep its returned ID. Use **Update Created Event** or **Remove Created Event** with that ID. Dates, recurrence, authority, capacity, and text are validated before changing the schedule. Titles need 1Ã¢â‚¬â€œ120 characters; notes allow up to 2048. Created schedules can be points or ranges, and the Blueprint nodes also support recurrence and handlers. The supplied player editor changes title, notes, start, and end; equal start and end creates a point.
+Use **Add Created Event** with an event definition and keep its returned ID. Use **Update Created Event** or **Remove Created Event** with that ID. Dates, recurrence, authority, capacity, and text are validated before changing the schedule. Titles need 1 to 120 characters; notes allow up to 2048. Created schedules can be points or ranges, and the Blueprint nodes also support recurrence and handlers. The supplied player editor changes title, notes, start, and end; equal start and end creates a point.
 
 **Get Events For Day** returns bounded event views, including Source, Created ID, occurrence start/end, and active state. It does not run handlers. **On Schedule Changed** refreshes local agendas after creation, editing, deletion, restoration, or replication. **On Event Triggered** includes Source, Created ID, and Phase so your gameplay can distinguish ownership and start/end notifications.
 
