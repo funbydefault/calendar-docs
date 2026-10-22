@@ -76,6 +76,7 @@
 
 ## Contents
 
+- [Try the showcase](#try-the-showcase)
 - [Change your calendar setup](#change-your-calendar-setup)
 - [Calendar rules](#calendar-rules)
 - [Date operations](#date-operations)
@@ -88,9 +89,37 @@
 - [Advanced Blueprint reference](#advanced-blueprint-reference)
 - [Support](#support)
 
+## Try the showcase
+
+Open **CalendarShowcase** in the plugin's **Example/Maps** folder and press **Play**. Select Civil calendar, Valley seasons, or Astral calendar to try different rules and layouts.
+
+You can also [download the free Windows demo](https://funbydefault.itch.io/calendar-demo) to try this map without Unreal Editor. The standalone demo does not include the plugin source or Calendar Editor.
+
+The triangle button at the bottom center starts time. It changes to a pause icon while playing. One calendar day takes three game-time seconds. **Space** also toggles playback. Click or tap the button, or focus it and use your controller's confirm button.
+
+Scheduled events open a centered popup and pause the showcase clock. Choose **Next event** to read another queued event, then **Continue** to resume. A popup stays open until dismissed. If time was stopped or paused before the event, it stays stopped or paused afterward. **Enter**, **Space**, **Escape**, or the controller's confirm/back button also closes the current popup.
+
+![Showcase event popup with its Next event button and paused calendar](images/showcase-event-popup.png)
+
+*Read each queued event before continuing. The clock stays paused while a popup is open.*
+
+The supplied example events use **Trigger When Crossed**, so the accelerated clock can reach them between visible time steps. Event popups and pausing belong to the showcase menu. Your game's event handlers and reusable calendar sheet keep the behavior you configure.
+
 ## Change your calendar setup
 
 Double-click a Calendar Profile, Calendar Definition, or Calendar Theme in the Content Browser to open it in the central editor. You can also create these asset types from the **Calendar** category in the Content Browser's Add menu.
+
+The **Profile** dropdown includes three built-in examples: **DA_CivilProfile** (month grid), **DA_ValleyProfile** (week planner), and **DA_AstralProfile** (day list). The editor opens with Civil selected. Choosing **None** clears the preview.
+
+Built-in profiles, rules, and themes are **read-only**. You can inspect every section. To customize an example:
+
+1. Choose it in **Profile**.
+2. Click **Duplicate profile** and save in your project's Content folder.
+3. Edit your new profile. Its rules and theme are separate copies, so the built-in example stays unchanged.
+
+![Calendar Editor showing a built-in profile, its read-only notice, and the Duplicate profile button](images/built-in-profiles.png)
+
+*Duplicate profile creates editable profile, rules, and theme assets for your project.*
 
 | Section | What you can change |
 | --- | --- |
@@ -98,11 +127,12 @@ Double-click a Calendar Profile, Calendar Definition, or Calendar Theme in the C
 | Calendar rules | Identity, ordered months and weekdays, clock lengths, leap adjustments, and starting date |
 | Events & seasons | Categories, event names and descriptions, point/range dates, recurrence, seasonal labels, and handler classes |
 | Time & behavior | BeginPlay setup, timer units/amount/interval, missing-day policy, event limits, and logging |
-| Layout & text | Month grid, week planner, day list, date/time templates, era, week start, paging, sounds toggle, and replacement widget classes |
-| Appearance & sound | Fonts, colors, textures/material brushes, button states, spacing, sizes, and sound cues |
+| Layout & text | Month grid, week planner, day list, date/time templates, era, week start, paging, and replacement widget classes |
+| Appearance | Fonts, colors, textures/material brushes, button states, spacing, and sizes |
+| Sound | Enable interface sounds for the profile and choose its theme's sound cues |
 | Project integration | The selected actor's Calendar Component, including its normal replication setting |
 
-**New profile** copies the displayed rules and theme into your project. **Duplicate profile** also copies the profile's behavior and display settings. Rule copies get a new Definition ID so saves cannot silently cross between calendars. Keep the ID stable after shipping saved games. You can deliberately share a rules or theme asset by choosing the same asset in Overview; edits then affect every user of that asset.
+**New profile** and **Duplicate profile** copy the selected setup into your project, including separate rules and theme assets. With **None** selected, **New profile** creates a small starting calendar. Rule copies get a new Definition ID so saves cannot silently cross between calendars. Keep the ID stable after shipping saved games. You can deliberately share a rules or theme asset by choosing the same asset in Overview; edits then affect every user of that asset.
 
 Validation lists problems and the next step. Invalid rules hide the preview until fixed. The preview uses the native calendar sheet and native day cells, with sound, timers, and gameplay handlers off. Test replacement Blueprint widgets and sound cues in Play.
 
@@ -179,7 +209,7 @@ You can also call **Try Step** once after changing the settings. This moves the 
 
 ![Example Blueprint that stops the timer, sets a seven-day step every 1.5 game-time seconds, advances once, and starts the timer](images/calendar-seven-day-step-blueprint.png)
 
-*Example custom Blueprint function: Stop Auto Advance → Configure Auto Advance (Day, 7, 1.5 seconds) → Try Step → Start Auto Advance. Check each operation's Success result before continuing in your game.*
+*Example custom Blueprint function: Stop Auto Advance Ã¢â€ â€™ Configure Auto Advance (Day, 7, 1.5 seconds) Ã¢â€ â€™ Try Step Ã¢â€ â€™ Start Auto Advance. Check each operation's Success result before continuing in your game.*
 
 The pictured **ApplyWeeklyAdvance** function is a custom example to create in your own Blueprint. The extra **Try Step** moves the date immediately; leaving it out starts with the timer's first callback. Break each returned Calendar Operation Result and continue only on **Success**.
 
@@ -212,7 +242,7 @@ Large jumps produce bounded notifications for the latest occurrence and the prio
 
 Definition assets own **Built-In** events. Runtime **Created** events belong to the Calendar Component and have stable GUIDs. The runtime editor can inspect built-in entries but cannot change or remove them.
 
-Use **Add Created Event** with an event definition and keep its returned ID. Use **Update Created Event** or **Remove Created Event** with that ID. Dates, recurrence, authority, capacity, and text are validated before changing the schedule. Titles need 1–120 characters; notes allow up to 2048. Created schedules can be points or ranges, and the Blueprint nodes also support recurrence and handlers. The supplied player editor changes title, notes, start, and end; equal start and end creates a point.
+Use **Add Created Event** with an event definition and keep its returned ID. Use **Update Created Event** or **Remove Created Event** with that ID. Dates, recurrence, authority, capacity, and text are validated before changing the schedule. Titles need 1Ã¢â‚¬â€œ120 characters; notes allow up to 2048. Created schedules can be points or ranges, and the Blueprint nodes also support recurrence and handlers. The supplied player editor changes title, notes, start, and end; equal start and end creates a point.
 
 **Get Events For Day** returns bounded event views, including Source, Created ID, occurrence start/end, and active state. It does not run handlers. **On Schedule Changed** refreshes local agendas after creation, editing, deletion, restoration, or replication. **On Event Triggered** includes Source, Created ID, and Phase so your gameplay can distinguish ownership and start/end notifications.
 
@@ -241,11 +271,15 @@ A snapshot includes its schema, Definition ID, date, automatic-advance settings/
 
 Create a Widget Blueprint with **Calendar Widget** as its parent, create an instance for the owning player, and call **Bind Calendar** with that player's Calendar Component. Add the widget to the player's screen. Binding, browsing, and selecting dates do not change game time. Call Bind Calendar with an empty component to detach it.
 
-![Appearance and sound editor with theme controls and live preview](images/editor-appearance.png)
+![Appearance editor with theme controls and live preview](images/editor-appearance.png)
 
-*Your theme holds the fonts, brushes, colors, spacing, and local sound cues.*
+*Appearance contains your theme's fonts, brushes, colors, spacing, and sizes.*
 
 Assign a **Calendar Theme** asset to replace the heading and body fonts, sheet and day brushes, button states, colors, padding, cell height, fixed grid height, and optional hover, click, confirmation, removal, notification, and rejection sounds. Brushes can use textures, materials, or sliced borders. Use a runtime composite Font asset. You can replace the supplied fonts with your own imported fonts through the normal font picker.
+
+Open **Sound** to enable interface sounds for the profile and choose the theme's six sound cues. The editor preview stays silent; test sounds in Play.
+
+![Sound editor with the profile toggle, six sound cues, and silent calendar preview](images/editor-sound.png)
 
 ![Layout and text editor with display settings and the calendar preview](images/editor-layout.png)
 
