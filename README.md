@@ -76,7 +76,6 @@
 
 ## Contents
 
-- [Try the showcase](#try-the-showcase)
 - [Change your calendar setup](#change-your-calendar-setup)
 - [Calendar rules](#calendar-rules)
 - [Date operations](#date-operations)
@@ -88,22 +87,6 @@
 - [Validation and troubleshooting](#validation-and-troubleshooting)
 - [Advanced Blueprint reference](#advanced-blueprint-reference)
 - [Support](#support)
-
-## Try the showcase
-
-Open **CalendarShowcase** in the plugin's **Example/Maps** folder and press **Play**. Select Civil calendar, Valley seasons, or Astral calendar to try different rules and layouts.
-
-You can also [download the free Windows demo](https://funbydefault.itch.io/calendar-demo) to try this map without Unreal Editor. The standalone demo does not include the plugin source or Calendar Editor.
-
-The triangle button at the bottom center starts time. It changes to a pause icon while playing. One calendar day takes three game-time seconds. **Space** also toggles playback. Click or tap the button, or focus it and use your controller's confirm button.
-
-Scheduled events open a centered popup and pause the showcase clock. Choose **Next event** to read another queued event, then **Continue** to resume. A popup stays open until dismissed. If time was stopped or paused before the event, it stays stopped or paused afterward. **Enter**, **Space**, **Escape**, or the controller's confirm/back button also closes the current popup.
-
-![Showcase event popup with its Next event button and paused calendar](images/showcase-event-popup.png)
-
-*Read each queued event before continuing. The clock stays paused while a popup is open.*
-
-The supplied example events use **Trigger When Crossed**, so the accelerated clock can reach them between visible time steps. Event popups and pausing belong to the showcase menu. Your game's event handlers and reusable calendar sheet keep the behavior you configure.
 
 ## Change your calendar setup
 
@@ -367,6 +350,8 @@ On the definition itself, **Get Days in Month**, **Validate Definition**, and **
 </details>
 
 ## Support
+
+[Try the free Windows demo](https://funbydefault.itch.io/calendar-demo). It does not include the plugin source or Calendar Editor.
 
 Contact **FunByDefault** at [funbydefault.dev@gmail.com](mailto:funbydefault.dev@gmail.com). Include Calendar version, Unreal Engine version, platform, relevant operation result, and concise steps to reproduce the problem in a clean project. Do not send credentials or post private project files publicly.
 

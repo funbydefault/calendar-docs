@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Set up and customize Calendar for Unreal Engine. A visual Quick Start, editor settings and Blueprint reference."><title>Calendar 1.0 Documentation</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:1.5rem}body{margin:0;background:#f4f6f8;color:#243247;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1060px;margin:2rem auto;padding:2.5rem 3rem;background:white;border:1px solid #dce3eb;border-radius:12px}h1,h2,h3{line-height:1.25;color:#142e52}h1{font-size:2.4rem;margin-top:0}h2{margin-top:2.8rem;border-top:1px solid #dce3eb;padding-top:1.5rem}h3{margin-top:2rem}a{color:#1459a1;text-underline-offset:.18em}a:hover{color:#08376b}a:focus-visible,summary:focus-visible,div[tabindex]:focus-visible{outline:3px solid #1372ce;outline-offset:4px}p,li{overflow-wrap:anywhere}li{padding-left:.25rem;margin:.7rem 0}img{max-width:100%;height:auto;border:1px solid #c5cfda;border-radius:6px;display:block;margin:1rem 0}.image-link{display:block}.callout{margin:1.5rem 0;padding:.75rem 1.2rem;border-left:5px solid #3d76ad;background:#edf4fb;border-radius:0 6px 6px 0}.callout p{margin:.3rem 0}.tip{border-color:#27806b;background:#eaf6f1}.warning{border-color:#b26d13;background:#fff5e5}.important{border-color:#8151a6;background:#f5eefb}.table-scroll{overflow-x:auto;margin:1.3rem 0}table{border-collapse:collapse;width:100%;font-size:.94rem}th,td{text-align:left;border:1px solid #d8e0e9;padding:.65rem .8rem;vertical-align:top}th{background:#edf2f7}tr:nth-child(even){background:#f8fafc}code{font-size:.88em;background:#eef2f6;padding:.12rem .3rem;border-radius:3px}pre{overflow:auto;background:#f5f7fa;padding:1rem;border:1px solid #dce3eb;border-radius:6px}pre code{padding:0;background:none}details{padding:.9rem 1.1rem;border:1px solid #d7e0e9;border-radius:6px;margin:1rem 0}summary{cursor:pointer;font-weight:600}em{color:#4c5d72}@media(max-width:700px){body{font-size:16px}main{margin:0;padding:1.4rem 1.1rem;border:0;border-radius:0}h1{font-size:2rem}ol,ul{padding-left:1.4rem}th,td{padding:.5rem}.table-scroll{margin-left:-.2rem;margin-right:-.2rem}}pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+pre .hll { background-color: #ffffcc }
+pre { background: #f8f8f8; }
+pre .c { color: #3D7B7B; font-style: italic } /* Comment */
+pre .err { border: 1px solid #F00 } /* Error */
+pre .k { color: #008000; font-weight: bold } /* Keyword */
+pre .o { color: #666 } /* Operator */
+pre .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+pre .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+pre .cp { color: #9C6500 } /* Comment.Preproc */
+pre .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+pre .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+pre .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+pre .gd { color: #A00000 } /* Generic.Deleted */
+pre .ge { font-style: italic } /* Generic.Emph */
+pre .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+pre .gr { color: #E40000 } /* Generic.Error */
+pre .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre .gi { color: #008400 } /* Generic.Inserted */
+pre .go { color: #717171 } /* Generic.Output */
+pre .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+pre .gs { font-weight: bold } /* Generic.Strong */
+pre .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre .gt { color: #04D } /* Generic.Traceback */
+pre .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+pre .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+pre .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+pre .kp { color: #008000 } /* Keyword.Pseudo */
+pre .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+pre .kt { color: #B00040 } /* Keyword.Type */
+pre .m { color: #666 } /* Literal.Number */
+pre .s { color: #BA2121 } /* Literal.String */
+pre .na { color: #687822 } /* Name.Attribute */
+pre .nb { color: #008000 } /* Name.Builtin */
+pre .nc { color: #00F; font-weight: bold } /* Name.Class */
+pre .no { color: #800 } /* Name.Constant */
+pre .nd { color: #A2F } /* Name.Decorator */
+pre .ni { color: #717171; font-weight: bold } /* Name.Entity */
+pre .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+pre .nf { color: #00F } /* Name.Function */
+pre .nl { color: #767600 } /* Name.Label */
+pre .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+pre .nt { color: #008000; font-weight: bold } /* Name.Tag */
+pre .nv { color: #19177C } /* Name.Variable */
+pre .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+pre .w { color: #BBB } /* Text.Whitespace */
+pre .mb { color: #666 } /* Literal.Number.Bin */
+pre .mf { color: #666 } /* Literal.Number.Float */
+pre .mh { color: #666 } /* Literal.Number.Hex */
+pre .mi { color: #666 } /* Literal.Number.Integer */
+pre .mo { color: #666 } /* Literal.Number.Oct */
+pre .sa { color: #BA2121 } /* Literal.String.Affix */
+pre .sb { color: #BA2121 } /* Literal.String.Backtick */
+pre .sc { color: #BA2121 } /* Literal.String.Char */
+pre .dl { color: #BA2121 } /* Literal.String.Delimiter */
+pre .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+pre .s2 { color: #BA2121 } /* Literal.String.Double */
+pre .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+pre .sh { color: #BA2121 } /* Literal.String.Heredoc */
+pre .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+pre .sx { color: #008000 } /* Literal.String.Other */
+pre .sr { color: #A45A77 } /* Literal.String.Regex */
+pre .s1 { color: #BA2121 } /* Literal.String.Single */
+pre .ss { color: #19177C } /* Literal.String.Symbol */
+pre .bp { color: #008000 } /* Name.Builtin.Pseudo */
+pre .fm { color: #00F } /* Name.Function.Magic */
+pre .vc { color: #19177C } /* Name.Variable.Class */
+pre .vg { color: #19177C } /* Name.Variable.Global */
+pre .vi { color: #19177C } /* Name.Variable.Instance */
+pre .vm { color: #19177C } /* Name.Variable.Magic */
+pre .il { color: #666 } /* Literal.Number.Integer.Long */</style></head><body><main><h1 id="calendar-10">Calendar 1.0</h1>
+<h2 id="quick-start">Quick Start</h2>
+<blockquote class="callout note"><p><strong>Note.</strong> This guide follows the current 1.0 development candidate. Final packages, engine compatibility, and multiplayer acceptance are still being verified. No C++ is needed for this setup.</p>
+</blockquote>
+<ol>
+<li>
+<p><strong>Install Calendar</strong> for Unreal Engine 5.4 using the Epic Games Launcher, or place the matching plugin folder in your project's <code>Plugins</code> folder before opening it.</p>
+</li>
+<li>
+<p><strong>Enable Calendar</strong> in <strong>Edit &gt; Plugins</strong>, then restart Unreal if prompted.</p>
+<p><a class="image-link" href="images/quick-enable.png"><img src="images/quick-enable.png" alt="Plugins window filtered to Calendar, with its Enabled checkbox marked" /></a></p>
+<p><em>Calendar must be checked before continuing.</em></p>
+</li>
+<li>
+<p><strong>Open Calendar Editor</strong> from <strong>Window &gt; Calendar Editor</strong>.</p>
+</li>
+<li>
+<p><strong>Click + New profile</strong> and save it in your project's Content folder as <code>DA_MyCalendar</code>.</p>
+<p><a class="image-link" href="images/quick-profile.png"><img src="images/quick-profile.png" alt="Calendar Editor with New profile marked" /></a></p>
+<p><em>New profile creates your own profile, rules, and theme assets. The preview shows the starting date.</em></p>
+</li>
+<li>
+<p><strong>Select Time &amp; behavior</strong> in the left navigation.</p>
+</li>
+<li>
+<p><strong>Set Auto Advance Unit to Day</strong>.</p>
+</li>
+<li>
+<p><strong>Check Start Auto Advance on Begin Play</strong>. Keep <strong>Initialize on Begin Play</strong> checked, <strong>Auto Advance Amount</strong> at <code>1</code>, and <strong>Auto Advance Interval Seconds</strong> at <code>1</code>.</p>
+<p><a class="image-link" href="images/quick-time.png"><img src="images/quick-time.png" alt="Time and behavior settings marked: initialization, automatic start, Day, amount 1, interval 1 second" /></a></p>
+<p><em>1: both start options are checked. 2: Day, amount 1, interval 1 second.</em></p>
+</li>
+<li>
+<p><strong>Click Save changes</strong> to save the profile, rules, and theme.</p>
+</li>
+<li>
+<p><strong>Create an Actor Blueprint</strong> in your Content Browser: <strong>Add &gt; Blueprint Class &gt; Actor</strong>. Name it <code>BP_GameCalendar</code>.</p>
+</li>
+<li>
+<p><strong>Add a Calendar Component</strong> in that Blueprint's Components panel. Name it <code>GameCalendar</code>.</p>
+<p><a class="image-link" href="images/quick-component.png"><img src="images/quick-component.png" alt="Blueprint Components panel with Add and the selected GameCalendar component marked" /></a></p>
+<p><em>1: Add opens the component search. 2: GameCalendar is the component you added.</em></p>
+</li>
+<li>
+<p><strong>Assign DA_MyCalendar to Profile</strong> on that component.</p>
+<p><a class="image-link" href="images/quick-actor.png"><img src="images/quick-actor.png" alt="Calendar Component settings with its Profile assigned to DA_MyCalendar" /></a></p>
+<p><em>The profile supplies the component's rules and time settings when Play begins.</em></p>
+</li>
+<li>
+<p><strong>Drag GameCalendar from Components into the Event Graph</strong> to get a reference to it.</p>
+</li>
+<li>
+<p><strong>Drag from GameCalendar's blue output and add Get Profile</strong>.</p>
+</li>
+<li>
+<p><strong>Drag from Profile and add Create Calendar Widget</strong>. Connect <code>GameCalendar</code> to its <strong>Component</strong> input.</p>
+</li>
+<li>
+<p><strong>Drag from Create Calendar Widget's Return Value and add Add to Viewport</strong>.</p>
+</li>
+<li>
+<p><strong>Connect Event BeginPlay's white execution output to Add to Viewport</strong>. <strong>Create Calendar Widget</strong> has no white execution pins; Unreal evaluates it when Add to Viewport needs the widget.</p>
+<p><a class="image-link" href="images/quick-blueprint.png"><img src="images/quick-blueprint.png" alt="Compiled BeginPlay graph connecting the profile and GameCalendar to Create Calendar Widget, then Add to Viewport" /></a></p>
+<p><em>1: the white line connects BeginPlay directly to Add to Viewport. 2: the blue line supplies the widget. Profile reads the asset assigned in step 11.</em></p>
+</li>
+<li>
+<p><strong>Compile and save the Blueprint</strong>.</p>
+</li>
+<li>
+<p><strong>Place BP_GameCalendar in your own level</strong> and save the level.</p>
+</li>
+<li>
+<p><strong>Press Play</strong>. The calendar sheet appears and its date advances once per game-time second. Stop Play before editing its setup.</p>
+<p><a class="image-link" href="images/quick-result.png"><img src="images/quick-result.png" alt="Calendar sheet running in the blank project's Play window with its current date marked" /></a></p>
+<p><em>Success: the displayed date changes while Play runs. This capture uses 1 January, year 1 as its Start Date; yours uses the Start Date in Calendar rules. The editor's silent preview does not advance time.</em></p>
+</li>
+</ol>
+<blockquote class="callout tip"><p><strong>Tip.</strong> Select any screenshot to inspect its controls at full size. For interactive browsing, set input mode and focus in your Player Controller as described in <a href="#add-player-controls">Add player controls</a>.</p>
+</blockquote>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#change-your-calendar-setup">Change your calendar setup</a></li>
+<li><a href="#calendar-rules">Calendar rules</a></li>
+<li><a href="#date-operations">Date operations</a></li>
+<li><a href="#automatic-time-advancement">Automatic time advancement</a></li>
+<li><a href="#calendar-events">Calendar events</a></li>
+<li><a href="#save-and-restore">Save and restore</a></li>
+<li><a href="#reusable-calendar-ui">Reusable calendar UI</a></li>
+<li><a href="#authority-and-networking">Authority and networking</a></li>
+<li><a href="#validation-and-troubleshooting">Validation and troubleshooting</a></li>
+<li><a href="#advanced-blueprint-reference">Advanced Blueprint reference</a></li>
+<li><a href="#support">Support</a></li>
+</ul>
+<h2 id="change-your-calendar-setup">Change your calendar setup</h2>
+<p>Double-click a Calendar Profile, Calendar Definition, or Calendar Theme in the Content Browser to open it in the central editor. You can also create these asset types from the <strong>Calendar</strong> category in the Content Browser's Add menu.</p>
+<p>The <strong>Profile</strong> dropdown includes three built-in examples: <strong>DA_CivilProfile</strong> (month grid), <strong>DA_ValleyProfile</strong> (week planner), and <strong>DA_AstralProfile</strong> (day list). The editor opens with Civil selected. Choosing <strong>None</strong> clears the preview.</p>
+<p>Built-in profiles, rules, and themes are <strong>read-only</strong>. You can inspect every section. To customize an example:</p>
+<ol>
+<li>Choose it in <strong>Profile</strong>.</li>
+<li>Click <strong>Duplicate profile</strong> and save in your project's Content folder.</li>
+<li>Edit your new profile. Its rules and theme are separate copies, so the built-in example stays unchanged.</li>
+</ol>
+<p><a class="image-link" href="images/built-in-profiles.png"><img src="images/built-in-profiles.png" alt="Calendar Editor showing a built-in profile, its read-only notice, and the Duplicate profile button" /></a></p>
+<p><em>Duplicate profile creates editable profile, rules, and theme assets for your project.</em></p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>What you can change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overview</td>
+<td>The profile's rules and theme assets</td>
+</tr>
+<tr>
+<td>Calendar rules</td>
+<td>Identity, ordered months and weekdays, clock lengths, leap adjustments, and starting date</td>
+</tr>
+<tr>
+<td>Events &amp; seasons</td>
+<td>Categories, event names and descriptions, point/range dates, recurrence, seasonal labels, and handler classes</td>
+</tr>
+<tr>
+<td>Time &amp; behavior</td>
+<td>BeginPlay setup, timer units/amount/interval, missing-day policy, event limits, and logging</td>
+</tr>
+<tr>
+<td>Layout &amp; text</td>
+<td>Month grid, week planner, day list, date/time templates, era, week start, paging, and replacement widget classes</td>
+</tr>
+<tr>
+<td>Appearance</td>
+<td>Fonts, colors, textures/material brushes, button states, spacing, and sizes</td>
+</tr>
+<tr>
+<td>Sound</td>
+<td>Enable interface sounds for the profile and choose its theme's sound cues</td>
+</tr>
+<tr>
+<td>Project integration</td>
+<td>The selected actor's Calendar Component, including its normal replication setting</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>New profile</strong> and <strong>Duplicate profile</strong> copy the selected setup into your project, including separate rules and theme assets. With <strong>None</strong> selected, <strong>New profile</strong> creates a small starting calendar. Rule copies get a new Definition ID so saves cannot silently cross between calendars. Keep the ID stable after shipping saved games. You can deliberately share a rules or theme asset by choosing the same asset in Overview; edits then affect every user of that asset.</p>
+<p>Validation lists problems and the next step. Invalid rules hide the preview until fixed. The preview uses the native calendar sheet and native day cells, with sound, timers, and gameplay handlers off. Test replacement Blueprint widgets and sound cues in Play.</p>
+<p><strong>Apply profile to actor</strong> changes one selected level actor and supports Undo. It does not edit the actor's Blueprint class defaults. For reusable Actor Blueprints, add a Calendar Component and assign its <strong>Profile</strong> in the Blueprint's Details panel. Profiles are read before automatic BeginPlay initialization. They override the component's individual setup fields. Clear <strong>Profile</strong> to use those fields directly. Use <strong>Use selected actor</strong> to inspect an existing level setup.</p>
+<p>Changes use Unreal's undo history. <strong>Save changes</strong> saves the current profile, rules, and theme; save level or Blueprint edits with their own Save command. Existing components without a profile continue to use their previous settings. Profile setup does not change existing snapshot formats or saved dates.</p>
+<p><a class="image-link" href="images/editor-rules.png"><img src="images/editor-rules.png" alt="Calendar rules editor with month and weekday arrays and the start-date section" /></a></p>
+<p><em>Expand Months or Weekdays to edit their entries. The preview updates as you change valid rules.</em></p>
+<h2 id="calendar-rules">Calendar rules</h2>
+<p>Create separate definition assets for calendars with different rules. Treat the assigned definition as fixed during a play session. After changing rules, validate them and initialize the component again.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Definition ID</td>
+<td>Stable identity used by snapshots and diagnostics. Keep it unique and preserve it when updating an existing calendar.</td>
+</tr>
+<tr>
+<td>Months</td>
+<td>Ordered months. Each needs a unique ID and at least one day. The first entry is month <code>1</code>.</td>
+</tr>
+<tr>
+<td>Weekdays</td>
+<td>Ordered weekday cycle. Each needs a unique ID. Its entry count defines the length of a week.</td>
+</tr>
+<tr>
+<td>Epoch Weekday Index</td>
+<td>Zero-based weekday assigned to year <code>1</code>, month <code>1</code>, day <code>1</code>. It must reference a weekday entry.</td>
+</tr>
+<tr>
+<td>Clock</td>
+<td>Hours per day, minutes per hour, and seconds per minute. Each value must be at least <code>1</code>.</td>
+</tr>
+<tr>
+<td>Start Date</td>
+<td>Date used when initializing or resetting the component. It must fit the calendar rules.</td>
+</tr>
+<tr>
+<td>Year Adjustment Rules</td>
+<td>Add or remove days from a selected month in repeating years.</td>
+</tr>
+<tr>
+<td>Event Categories</td>
+<td>Ordered groups of scheduled event entries.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Years, months, and days start at <code>1</code>. Hours, minutes, and seconds start at <code>0</code>. Dates before year <code>1</code> and values outside the definition's ranges are rejected.</p>
+<p>Give each year-adjustment rule a unique <strong>ID</strong>, such as <code>LeapDay</code>. A rule uses <strong>First Year</strong>, <strong>Interval Years</strong>, <strong>Month</strong>, and a signed <strong>Day Adjustment</strong>. For example, first year <code>4</code>, interval <code>4</code>, month <code>2</code>, and adjustment <code>1</code> adds one day to month <code>2</code> every fourth year from year <code>4</code>. Several matching rules combine. Validate the definition after editing them; every resulting month must remain valid.</p>
+<p><strong>Season ID</strong> on a month is an optional label for your game. Calendar does not create weather or seasonal effects.</p>
+<h2 id="date-operations">Date operations</h2>
+<p>Use a reference to your actor's Calendar Component to call these nodes:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initialize Calendar</td>
+<td>Validate the definition and copy its Start Date into the component. An optional replacement definition may be supplied.</td>
+</tr>
+<tr>
+<td>Try Set Date</td>
+<td>Set an exact valid destination date. Invalid values are rejected.</td>
+</tr>
+<tr>
+<td>Try Advance</td>
+<td>Move forward or backward by a signed number of seconds, minutes, hours, days, weeks, months, or years.</td>
+</tr>
+<tr>
+<td>Try Step</td>
+<td>Apply the configured automatic unit and amount once, without starting a timer.</td>
+</tr>
+<tr>
+<td>Reset to Start Date</td>
+<td>Return to the definition's Start Date. Event evaluation is off by default for this reset.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Each returns a <strong>Calendar Operation Result</strong>. Break the result and check <strong>Success</strong> before using the new state. On failure, read <strong>Message</strong>, <strong>Context</strong>, and <strong>Suggested Action</strong>.</p>
+<p>For month and year moves, choose the missing-day policy:</p>
+<ul>
+<li>
+<p><strong>Clamp Day:</strong> use the destination month's last day when the original day is missing.</p>
+</li>
+<li>
+<p><strong>Reject:</strong> leave the date unchanged and return a failure.</p>
+</li>
+</ul>
+<p>For example, advancing from day <code>31</code> to a month with <code>30</code> days gives day <code>30</code> with Clamp Day. Reject keeps the original date. An amount of <code>0</code> is a successful no-op.</p>
+<p>The component exposes <strong>On Calendar Changed</strong>, <strong>On Day Changed</strong>, <strong>On Month Changed</strong>, and <strong>On Year Changed</strong>. These Blueprint events notify your game when the corresponding date value changes. Bind them to update your UI or gameplay. A jump produces notifications for the committed change, not a notification for every intermediate date.</p>
+<h2 id="automatic-time-advancement">Automatic time advancement</h2>
+<p>Automatic advancement uses a world timer. The Calendar Component does not need Tick.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th style="text-align:right">Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start Auto Advance on Begin Play</td>
+<td style="text-align:right">Off</td>
+<td>Start the timer after successful automatic initialization.</td>
+</tr>
+<tr>
+<td>Auto Advance Unit</td>
+<td style="text-align:right">Second</td>
+<td>Calendar unit moved by each timer callback.</td>
+</tr>
+<tr>
+<td>Auto Advance Amount</td>
+<td style="text-align:right"><code>1</code></td>
+<td>Signed non-zero number of units moved per callback.</td>
+</tr>
+<tr>
+<td>Auto Advance Interval Seconds</td>
+<td style="text-align:right"><code>1</code></td>
+<td>Game-time interval between callbacks. It must be finite and at least <code>0.001</code> seconds.</td>
+</tr>
+<tr>
+<td>Auto Advance Adjustment Policy</td>
+<td style="text-align:right">Clamp Day</td>
+<td>Missing-day behavior for month and year moves.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use <strong>Start Auto Advance</strong> to start or resume, <strong>Pause Auto Advance</strong> to pause a running timer, and <strong>Stop Auto Advance</strong> to clear it. <strong>Configure Auto Advance</strong> changes the settings while the timer is stopped. Stop it before reconfiguring, then start it again.</p>
+<p>For a seven-day step every <code>1.5</code> game-time seconds, stop the timer, call <strong>Configure Auto Advance</strong> with Unit <code>Day</code>, Amount <code>7</code>, and Interval Seconds <code>1.5</code>, check Success, then call <strong>Start Auto Advance</strong>. Use Unit <code>Week</code> when you want a step based on the number of weekdays in your definition.</p>
+<p>You can also call <strong>Try Step</strong> once after changing the settings. This moves the date ahead immediately. <strong>Start Auto Advance</strong> then starts the repeating timer.</p>
+<p><a class="image-link" href="images/calendar-seven-day-step-blueprint.png"><img src="images/calendar-seven-day-step-blueprint.png" alt="Example Blueprint that stops the timer, sets a seven-day step every 1.5 game-time seconds, advances once, and starts the timer" /></a></p>
+<p><em>Example custom Blueprint function: Stop Auto Advance Ã¢â€ â€™ Configure Auto Advance (Day, 7, 1.5 seconds) Ã¢â€ â€™ Try Step Ã¢â€ â€™ Start Auto Advance. Check each operation's Success result before continuing in your game.</em></p>
+<p>The pictured <strong>ApplyWeeklyAdvance</strong> function is a custom example to create in your own Blueprint. The extra <strong>Try Step</strong> moves the date immediately; leaving it out starts with the timer's first callback. Break each returned Calendar Operation Result and continue only on <strong>Success</strong>.</p>
+<p><a class="image-link" href="images/calendar-seven-day-settings-blueprint.png"><img src="images/calendar-seven-day-settings-blueprint.png" alt="Configure Auto Advance detail showing Unit Day, Amount 7, and Interval Seconds 1.5" /></a></p>
+<p><em>Settings detail: Unit Day, Amount 7, Interval Seconds 1.5.</em></p>
+<p><strong>On Auto Advance State Changed</strong> reports Stopped, Running, or Paused. World pause and time dilation affect this game-time timer. A failed automatic step stops the timer; fix the reported problem before restarting it.</p>
+<h2 id="calendar-events">Calendar events</h2>
+<p>Add an <strong>Event Category</strong> with a unique ID to your definition, then add event entries. Each entry needs an ID unique across the entire definition and a valid <strong>First Occurrence</strong>.</p>
+<p>For a one-time entry, leave <strong>Repeats</strong> off. For a repeating entry, enable it and choose <strong>Repeat Unit</strong> and a positive <strong>Repeat Interval</strong>. <strong>Enabled</strong> controls whether an entry participates in evaluation.</p>
+<p>Bind the component's <strong>On Event Triggered</strong> delegate and inspect its context. It includes the event and category identity, scheduled occurrence, previous/current dates, and reason for the change. You can use the IDs to connect entries to your own game logic.</p>
+<p>For reusable custom behavior, create a Blueprint derived from <strong>Calendar Event</strong>, implement <strong>Trigger Calendar Event</strong>, and assign that Blueprint class as the entry's <strong>Handler Class</strong>. The handler is cached for that category/event pair. Its object state is not included in calendar save snapshots.</p>
+<blockquote class="callout important"><p><strong>Important.</strong> Point events use exact destination matching by default. Enable <strong>Trigger When Crossed</strong> to notify the latest occurrence crossed by a forward time change. Created events enable this automatically. A range uses <strong>Has End Date</strong> and an <strong>End Date</strong> later than its start; it sends Started and Ended notifications, with the end excluded from its active interval. Moving backwards does not replay range boundaries. Monthly repeats retain their anchor day rather than clamping to a shorter month.</p>
+</blockquote>
+<p>Large jumps produce bounded notifications for the latest occurrence and the prior active interval's end. They do not replay every skipped recurrence. Calendar tries at most 64 earlier repeat anchors when a date is missing. Repeating ranges preserve their duration in configured calendar seconds. Store once-only gameplay completion state in your game; evaluating a matching point again can trigger it again.</p>
+<p><strong>Evaluate Events at Current Date</strong> evaluates without changing the date. On date-changing nodes, the <strong>Evaluate Events</strong> option controls whether matching entries are dispatched. Handlers and <strong>On Event Triggered</strong> run in scheduled time order; simultaneous boundaries retain authored order. Avoid changing the same calendar from inside its event handler; nested calendar mutations are rejected.</p>
+<p><strong>Max Events Per Evaluation</strong> defaults to <code>256</code>, with a supported range of <code>1</code> to <code>10000</code>. If a time change produces more notifications than the limit, it is rejected before changing the date. The same limit bounds the number of created entries. Use smaller steps, remove entries, or intentionally increase the limit after reviewing the cost.</p>
+<h3 id="built-in-and-created-schedules">Built-in and created schedules</h3>
+<p>Definition assets own <strong>Built-In</strong> events. Runtime <strong>Created</strong> events belong to the Calendar Component and have stable GUIDs. The runtime editor can inspect built-in entries but cannot change or remove them.</p>
+<p>Use <strong>Add Created Event</strong> with an event definition and keep its returned ID. Use <strong>Update Created Event</strong> or <strong>Remove Created Event</strong> with that ID. Dates, recurrence, authority, capacity, and text are validated before changing the schedule. Titles need 1Ã¢â‚¬â€œ120 characters; notes allow up to 2048. Created schedules can be points or ranges, and the Blueprint nodes also support recurrence and handlers. The supplied player editor changes title, notes, start, and end; equal start and end creates a point.</p>
+<p><strong>Get Events For Day</strong> returns bounded event views, including Source, Created ID, occurrence start/end, and active state. It does not run handlers. <strong>On Schedule Changed</strong> refreshes local agendas after creation, editing, deletion, restoration, or replication. <strong>On Event Triggered</strong> includes Source, Created ID, and Phase so your gameplay can distinguish ownership and start/end notifications.</p>
+<p>Switching to a different definition clears the component's created schedule. Keep a separate snapshot for each calendar you need to restore. Save snapshots through your SaveGame flow to keep them between sessions.</p>
+<h2 id="save-and-restore">Save and restore</h2>
+<p>Calendar supplies snapshot data. Your game's SaveGame object, save slots, storage, and loading flow remain yours.</p>
+<ol>
+<li>
+<p>Create a Blueprint class derived from Unreal's <strong>SaveGame</strong> and add a variable of type <strong>Calendar Save Snapshot</strong>.</p>
+</li>
+<li>
+<p>Call <strong>Try Create Snapshot</strong> on an initialized Calendar Component. On Success, put Out Snapshot into that variable and use your normal <strong>Save Game to Slot</strong> flow.</p>
+</li>
+<li>
+<p>Load the SaveGame object. Assign and initialize the same definition on the target component, then call <strong>Restore Snapshot</strong> with the saved value.</p>
+</li>
+<li>
+<p>Check the returned result before continuing your load flow.</p>
+</li>
+</ol>
+<p>A snapshot includes its schema, Definition ID, date, automatic-advance settings/state, and created schedule with stable IDs. Built-in schedules remain in the definition asset. It excludes event-handler object state. Restore rejects incompatible schemas, different Definition IDs, invalid dates or timer settings, duplicate created IDs, invalid ranges, oversized text, or a created schedule beyond the component limit.</p>
+<p><strong>Restore Auto Advance</strong> controls whether a saved running or paused timer is restored. Turning it off still restores timer settings but leaves the timer stopped. Restoration does not replay scheduled events. A snapshot saves timer settings and state, not the remaining countdown. Restoring a timer starts a fresh configured interval.</p>
+<blockquote class="callout warning"><p><strong>Warning.</strong> Keep Definition IDs stable. Changing month order, lengths, or other rules can make existing saved dates invalid or change their meaning. Plan and test your own save migration before changing a calendar used by released saves.</p>
+</blockquote>
+<h2 id="reusable-calendar-ui">Reusable calendar UI</h2>
+<p>Create a Widget Blueprint with <strong>Calendar Widget</strong> as its parent, create an instance for the owning player, and call <strong>Bind Calendar</strong> with that player's Calendar Component. Add the widget to the player's screen. Binding, browsing, and selecting dates do not change game time. Call Bind Calendar with an empty component to detach it.</p>
+<p><a class="image-link" href="images/editor-appearance.png"><img src="images/editor-appearance.png" alt="Appearance editor with theme controls and live preview" /></a></p>
+<p><em>Appearance contains your theme's fonts, brushes, colors, spacing, and sizes.</em></p>
+<p>Assign a <strong>Calendar Theme</strong> asset to replace the heading and body fonts, sheet and day brushes, button states, colors, padding, cell height, fixed grid height, and optional hover, click, confirmation, removal, notification, and rejection sounds. Brushes can use textures, materials, or sliced borders. Use a runtime composite Font asset. You can replace the supplied fonts with your own imported fonts through the normal font picker.</p>
+<p>Open <strong>Sound</strong> to enable interface sounds for the profile and choose the theme's six sound cues. The editor preview stays silent; test sounds in Play.</p>
+<p><a class="image-link" href="images/editor-sound.png"><img src="images/editor-sound.png" alt="Sound editor with the profile toggle, six sound cues, and silent calendar preview" /></a></p>
+<p><a class="image-link" href="images/editor-layout.png"><img src="images/editor-layout.png" alt="Layout and text editor with display settings and the calendar preview" /></a></p>
+<p><em>Change presentation here; simulation dates keep their original meaning.</em></p>
+<p><strong>Display Settings &gt; Layout</strong> chooses <strong>Month grid</strong>, <strong>Week planner</strong>, or <strong>Day list</strong>. Week planner shows one week of date cards. Day list shows one date per row, with its event names. <strong>Rows Per Page</strong> sets the number of list dates or the maximum month rows. Choose a layout in the widget defaults or change it in Blueprint and call <strong>Refresh Presentation</strong>. You can keep your own day widgets and theme in every layout.</p>
+<p><strong>Display Settings</strong> also controls date and time templates, the displayed year offset and era, AM/PM labels, first weekday, and rows per page. Call <strong>Refresh Presentation</strong> after changing presentation settings. The simulation still uses its definition's ordered months, weekday cycle, clock subdivisions, year adjustments, and one-based year. A display offset can show year zero or another era without changing save data.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Template</th>
+<th>Example use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{weekday}, {monthName} {day}, {year}</code></td>
+<td>Named date with your weekday and month labels</td>
+</tr>
+<tr>
+<td><code>{day2}/{month2}/{year} {era}</code></td>
+<td>Padded numeric date and era suffix</td>
+</tr>
+<tr>
+<td><code>{hour2}:{minute2}:{second2}</code></td>
+<td>Clock using the definition's subdivisions</td>
+</tr>
+<tr>
+<td><code>{hour12}:{minute2} {period}</code></td>
+<td>Twelve-hour clock for a 24-hour day</td>
+</tr>
+</tbody>
+</table></div>
+<p>Other tokens are <code>{month}</code>, <code>{season}</code>, <code>{hour}</code>, <code>{minute}</code>, and <code>{second}</code>. AM/PM is empty for clocks with a different number of hours. Invalid dates produce empty text. Displayed years use signed 64-bit numbers and saturate if an offset would overflow.</p>
+<p>Set weekday <strong>Short Name</strong> for compact grid headings; the full name remains available in hover help. Weeks of up to 14 days align to their configured weekday cycle. Longer weeks use a continuous 14-column grid. Month pages contain at most 12 rows; page controls let you browse longer months. Day cells show up to eight matching event names, without running event handlers. Use <strong>Get Events For Day</strong> for a source-aware agenda that includes overlapping ranges. The native grid reserves its height across months, fills empty row cells, and shows paging controls only when needed. Clock-only changes update labels without rebuilding the day buttons or stealing focus. Selecting a day keeps it selected as time passes; <strong>Today</strong> follows the live date again.</p>
+<p>To replace each day tile, make a Widget Blueprint with <strong>Calendar Day Widget</strong> as its parent and assign it to <strong>Day Widget Class</strong>. Its <strong>View</strong> supplies the date, today/selection highlights, and event names. Implement <strong>On Cell Updated</strong> to refresh your artwork. Optional designer widgets named <code>DayButton</code> and <code>DayLabel</code> receive native click and label updates. A custom click flow can call <strong>Select Date</strong> on the calendar sheet.</p>
+<p>You can supply a complete designer layout in a Calendar Widget child. Optional controls named <code>Sheet</code>, <code>MonthTitle</code>, <code>DateLabel</code>, <code>TimeLabel</code>, <code>DetailLabel</code>, <code>DaysGrid</code>, <code>PreviousMonth</code>, <code>NextMonth</code>, <code>TodayButton</code>, <code>PreviousPage</code>, and <code>NextPage</code> receive native updates. With no designer tree, the native layout is created automatically. <strong>On Presentation Changed</strong> exposes a refresh hook for your own graphics. Keep replacement controls focusable for keyboard/gamepad navigation and large enough for touch.</p>
+<p>The UI observes its supplied component in the same world. It is local presentation; it does not send client requests to change a replicated server calendar. Use your game's validated server request flow for time-changing controls.</p>
+<h3 id="add-player-controls">Add player controls</h3>
+<p>Your Player Controller owns input mode and focus. After adding the calendar to the screen, use <strong>Set Input Mode Game and UI</strong> and focus a day cell when using keyboard or gamepad navigation. Keep mouse controls clickable and touch targets large enough to tap.</p>
+<p>The calendar sheet lets a player browse and select dates without changing game time. Your game's buttons can call <strong>Try Advance</strong>, <strong>Start Auto Advance</strong>, <strong>Pause Auto Advance</strong>, or <strong>Reset to Start Date</strong>. Bind those actions to mouse/keyboard, gamepad, and touch in your project. For a shared timeline, send permitted changes through your server request flow.</p>
+<p>For a custom schedule interface, derive from <strong>Calendar Event Editor Widget</strong> or <strong>Calendar Agenda Entry Widget</strong>. Editor children receive <strong>On Editor Ready</strong> with their component and event view; call the component's validated schedule nodes, then <strong>Close Editor</strong>. Agenda children receive <strong>View</strong> and <strong>On Entry Presented</strong>; call <strong>Select Entry</strong> from your button. Built-in schedules are read-only in the player editor. Check authority before allowing changes.</p>
+<h2 id="authority-and-networking">Authority and networking</h2>
+<p>Replication shares calendar date changes from the server to connected players. It is off by default. Without it, each Calendar Component is an independent local timeline.</p>
+<p>For a shared timeline, use a server-owned replicated actor, enable replication on both the actor and Calendar Component, and assign the same installed definition assets to the participating builds. Definition, Current Date, and Created Events are replicated state. Server creation, edits, removals, and the current created schedule reach connected and late-joining clients. Date-change delegates can update each client's local display when new dates arrive.</p>
+<p>Change the shared calendar, run automatic steps and scheduled events, add/edit/remove created entries, and create or restore snapshots on the server authority: the server that owns the shared calendar state. Calendar rejects those calls from players' replicated components. It does not send player requests to the server automatically. Use your game's server request flow and check which player may make each change.</p>
+<p>Scheduled handlers and On Event Triggered execute on the authority. Client UI, timer lifecycle settings, and event-handler state do not become shared simply because Current Date is replicated. Replicate your own resulting gameplay state where needed. Keep local input and UI on their owning client.</p>
+<blockquote class="callout note"><p><strong>Note.</strong> Calendar 1.0 targets standalone games and listen servers, where a player also hosts the server. Dedicated-server deployments are outside its advertised support scope. Release verification is in progress; engine and platform compatibility and final release approval remain pending.</p>
+</blockquote>
+<h2 id="validation-and-troubleshooting">Validation and troubleshooting</h2>
+<p>Use <strong>Validate Calendar Definition</strong> to obtain all definition issues, or <strong>Validate Configuration</strong> on the component to inspect its assigned rules and settings. Each issue includes a message, context, and suggested action.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calendar is not initialized</td>
+<td>Assign a valid definition, enable Initialize on Begin Play, or call Initialize Calendar.</td>
+</tr>
+<tr>
+<td>Date change is rejected</td>
+<td>Check the operation result, valid date ranges, missing-day policy, and authority.</td>
+</tr>
+<tr>
+<td>Timer does not advance</td>
+<td>Initialize first, use a non-zero amount and valid interval, then start it. Check world pause and the last failure.</td>
+</tr>
+<tr>
+<td>An event is missing</td>
+<td>Check Enabled, its exact anchor, repeat interval, end-exclusive range, crossing setting, notification limit, and authority.</td>
+</tr>
+<tr>
+<td>Snapshot cannot restore</td>
+<td>Check schema, Definition ID, date validity, timer settings, and initialization.</td>
+</tr>
+<tr>
+<td>Replicated calendar cannot initialize</td>
+<td>Enable replication on its owner as well as the component, and initialize on the server.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Get Diagnostic Snapshot</strong> returns current date, definition identity, initialization, timer, replication/authority, event-count, and last-operation state. Bind <strong>On Operation Failed</strong> for concise error feedback in your own tools. <strong>Enable Debug Logging</strong> is off by default. <strong>Dump Diagnostics to Log</strong> writes one bounded diagnostic entry and is a development-only node.</p>
+<p>For support, include the operation result and a small reproducible case. Remove sensitive project information before sharing logs.</p>
+<h2 id="advanced-blueprint-reference">Advanced Blueprint reference</h2>
+<details>
+<summary>Open the calculation nodes and data types</summary>
+<p>These utility nodes calculate or inspect values without changing a component's date:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Is Calendar Date Valid</td>
+<td>Test an exact date against the definition.</td>
+</tr>
+<tr>
+<td>Try Advance Calendar Date</td>
+<td>Calculate a destination using the chosen unit, amount, and missing-day policy.</td>
+</tr>
+<tr>
+<td>Try Get Calendar Day Index</td>
+<td>Convert a valid date to a zero-based whole-day index from <code>1/1/1</code>.</td>
+</tr>
+<tr>
+<td>Try Get Elapsed Calendar Days</td>
+<td>Signed difference between two day indices; time-of-day fields do not affect the difference.</td>
+</tr>
+<tr>
+<td>Try Get Calendar Weekday</td>
+<td>Resolve a weekday index and entry.</td>
+</tr>
+<tr>
+<td>Does Calendar Event Occur</td>
+<td>Match an event at an exact candidate date, without running its handler.</td>
+</tr>
+<tr>
+<td>Format Calendar Date</td>
+<td>Create display text using the definition's month names. Formatting does not validate the date.</td>
+</tr>
+</tbody>
+</table></div>
+<p>On the definition itself, <strong>Get Days in Month</strong>, <strong>Validate Definition</strong>, and <strong>Is Date Valid</strong> provide rule lookup and validation. Use the native Blueprint types <strong>Calendar Date Time</strong>, <strong>Calendar Operation Result</strong>, <strong>Calendar Validation Report</strong>, <strong>Calendar Event Context</strong>, <strong>Calendar Save Snapshot</strong>, and <strong>Calendar Diagnostic Snapshot</strong> to connect your logic.</p>
+</details>
+<h2 id="support">Support</h2>
+<p><a href="https://funbydefault.itch.io/calendar-demo">Try the free Windows demo</a>. It does not include the plugin source or Calendar Editor.</p>
+<p>Contact <strong>FunByDefault</strong> at <a href="mailto:funbydefault.dev@gmail.com">funbydefault.dev@gmail.com</a>. Include Calendar version, Unreal Engine version, platform, relevant operation result, and concise steps to reproduce the problem in a clean project. Do not send credentials or post private project files publicly.</p>
+<p><a href="https://github.com/funbydefault/calendar-docs/issues">Report a reproducible problem</a> if you can share it publicly.</p>
+</main></body></html>
