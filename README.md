@@ -3,9 +3,9 @@
 ## Quick Start
 
 > [!NOTE]
-> This guide follows the current 1.0 development candidate. Final packages, engine compatibility, and multiplayer acceptance are still being verified. No C++ is needed for this setup.
+> Use the Calendar package that matches your Unreal Engine version. Calendar 1.0 supports Unreal Engine 5.4 to 5.8 on Windows. No C++ is needed for this setup.
 
-1. **Install Calendar** for Unreal Engine 5.4 using the Epic Games Launcher, or place the matching plugin folder in your project's `Plugins` folder before opening it.
+1. **Install Calendar** for your Unreal Engine version using the Epic Games Launcher, or place the matching plugin folder in your project's `Plugins` folder before opening it.
 
 2. **Enable Calendar** in **Edit > Plugins**, then restart Unreal if prompted.
 
@@ -308,7 +308,7 @@ Change the shared calendar, run automatic steps and scheduled events, add/edit/r
 Scheduled handlers and On Event Triggered execute on the authority. Client UI, timer lifecycle settings, and event-handler state do not become shared simply because Current Date is replicated. Replicate your own resulting gameplay state where needed. Keep local input and UI on their owning client.
 
 > [!NOTE]
-> Calendar 1.0 targets standalone games and listen servers, where a player also hosts the server. Dedicated-server deployments are outside its advertised support scope. Release verification is in progress; engine and platform compatibility and final release approval remain pending.
+> Calendar 1.0 targets standalone games and listen servers, where a player also hosts the server. Dedicated-server deployments are outside its advertised support scope.
 
 ## Validation and troubleshooting
 

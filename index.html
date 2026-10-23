@@ -75,11 +75,11 @@ pre .vi { color: #19177C } /* Name.Variable.Instance */
 pre .vm { color: #19177C } /* Name.Variable.Magic */
 pre .il { color: #666 } /* Literal.Number.Integer.Long */</style></head><body><main><h1 id="calendar-10">Calendar 1.0</h1>
 <h2 id="quick-start">Quick Start</h2>
-<blockquote class="callout note"><p><strong>Note.</strong> This guide follows the current 1.0 development candidate. Final packages, engine compatibility, and multiplayer acceptance are still being verified. No C++ is needed for this setup.</p>
+<blockquote class="callout note"><p><strong>Note.</strong> Use the Calendar package that matches your Unreal Engine version. Calendar 1.0 supports Unreal Engine 5.4 to 5.8 on Windows. No C++ is needed for this setup.</p>
 </blockquote>
 <ol>
 <li>
-<p><strong>Install Calendar</strong> for Unreal Engine 5.4 using the Epic Games Launcher, or place the matching plugin folder in your project's <code>Plugins</code> folder before opening it.</p>
+<p><strong>Install Calendar</strong> for your Unreal Engine version using the Epic Games Launcher, or place the matching plugin folder in your project's <code>Plugins</code> folder before opening it.</p>
 </li>
 <li>
 <p><strong>Enable Calendar</strong> in <strong>Edit &gt; Plugins</strong>, then restart Unreal if prompted.</p>
@@ -449,7 +449,7 @@ pre .il { color: #666 } /* Literal.Number.Integer.Long */</style></head><body><m
 <p>For a shared timeline, use a server-owned replicated actor, enable replication on both the actor and Calendar Component, and assign the same installed definition assets to the participating builds. Definition, Current Date, and Created Events are replicated state. Server creation, edits, removals, and the current created schedule reach connected and late-joining clients. Date-change delegates can update each client's local display when new dates arrive.</p>
 <p>Change the shared calendar, run automatic steps and scheduled events, add/edit/remove created entries, and create or restore snapshots on the server authority: the server that owns the shared calendar state. Calendar rejects those calls from players' replicated components. It does not send player requests to the server automatically. Use your game's server request flow and check which player may make each change.</p>
 <p>Scheduled handlers and On Event Triggered execute on the authority. Client UI, timer lifecycle settings, and event-handler state do not become shared simply because Current Date is replicated. Replicate your own resulting gameplay state where needed. Keep local input and UI on their owning client.</p>
-<blockquote class="callout note"><p><strong>Note.</strong> Calendar 1.0 targets standalone games and listen servers, where a player also hosts the server. Dedicated-server deployments are outside its advertised support scope. Release verification is in progress; engine and platform compatibility and final release approval remain pending.</p>
+<blockquote class="callout note"><p><strong>Note.</strong> Calendar 1.0 targets standalone games and listen servers, where a player also hosts the server. Dedicated-server deployments are outside its advertised support scope.</p>
 </blockquote>
 <h2 id="validation-and-troubleshooting">Validation and troubleshooting</h2>
 <p>Use <strong>Validate Calendar Definition</strong> to obtain all definition issues, or <strong>Validate Configuration</strong> on the component to inspect its assigned rules and settings. Each issue includes a message, context, and suggested action.</p>
